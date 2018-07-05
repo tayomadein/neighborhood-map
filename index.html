@@ -12,31 +12,40 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="col s3 m3 l3">
-            <div class="input-field" id="search-bar">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="search-field" />
-                <label for="search-field">Search</label>
-            </div>
-            <div id="location-list">
-                <div class="collection">
-                    <a href="#!" class="collection-item">Alvin</a>
-                    <a href="#!" class="collection-item active">Alvin</a>
-                    <a href="#!" class="collection-item">Alvin</a>
-                    <a href="#!" class="collection-item">Alvin</a>
+    <nav>
+        <a href="#" data-target="slide-out" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+        </a>
+    </nav>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label class="label-icon" for="search">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <i class="material-icons">close</i>
                 </div>
-            </div>
-        </div>
-        <div class="col s9 m9 l9" id="map-view">
-
+            </form>
+        </li>
+        <li>
+            <a class="waves-effect" href="#!">My Places</a>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="" id="map">
         </div>
     </div>
 
     <!--JavaScript libraries-->
-    <script type="text/javascript" src="js/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
     <script type="text/javascript" src="js/lib/materialize.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdSSNDMdIuMpB_KZn8c_Pb9eL4WyXZMyQ&callback=initMap"
+        type="text/javascript"></script>
+
 </body>
 
 </html>
