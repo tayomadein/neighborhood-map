@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
+    <title>Neighborhood Map</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/lib/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-    </head>
+<body>
+    <div class="row">
+        <div class="col s3 m3 l3">
+            <div class="input-field" id="search-bar">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="search-field" />
+                <label for="search-field">Search</label>
+            </div>
+            <div id="location-list">
+                <div class="collection">
+                    <a href="#!" class="collection-item">Alvin</a>
+                    <a href="#!" class="collection-item active">Alvin</a>
+                    <a href="#!" class="collection-item">Alvin</a>
+                    <a href="#!" class="collection-item">Alvin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s9 m9 l9" id="map-view">
 
-    <body>
-        <div id="search-bar"></div>
-        <div id="location-list"></div>
-        <div id="map-view"></div>
-        <script src="js/lib/knockout-3.4.2.js"></script>
-    </body>
+        </div>
+    </div>
+
+    <!--JavaScript libraries-->
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="js/lib/materialize.min.js"></script>
+</body>
 
 </html>
