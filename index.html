@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Neighborhood Map</title>
+    <title>Lunch Neighborhood Map</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -21,7 +21,7 @@
         <li>
             <form>
                 <div class="input-field">
-                    <input id="search" type="search" required>
+                    <input id="search" type="search"> <!-- data-bind="textInput: searchInput, event: {keyup: search}" -->
                     <label class="label-icon" for="search">
                         <i class="material-icons">search</i>
                     </label>
@@ -29,8 +29,8 @@
                 </div>
             </form>
         </li>
-        <li>
-            <a class="waves-effect" href="#!">My Places</a>
+        <li class="collection"> <!--  data-bind="foreach: lunchLocations" -->
+            <a class="waves-effect collection-item" href="#!" ></a> <!-- data-bind="text: title, click: show" -->
         </li>
     </ul>
     <div class="row">
@@ -43,7 +43,8 @@
     <script type="text/javascript" src="js/lib/knockout-3.4.2.js"></script>
     <script type="text/javascript" src="js/lib/materialize.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdSSNDMdIuMpB_KZn8c_Pb9eL4WyXZMyQ&callback=initMap"
+    <script type="text/javascript" src="js/data.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdSSNDMdIuMpB_KZn8c_Pb9eL4WyXZMyQ&callback=initMap" onerror="mapError()"
         type="text/javascript"></script>
 
 </body>
