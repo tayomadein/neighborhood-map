@@ -49,7 +49,7 @@ var mapLocations = [
         }
     },
     {
-        title: "Gypsy’s Restaurant & Bar",
+        title: "Gypsy's Restaurant & Bar",
         location: {
             lat: 6.548254,
             lng: 3.364976
