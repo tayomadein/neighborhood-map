@@ -12,16 +12,18 @@
 </head>
 
 <body>
-    <nav>
-        <a href="#" data-target="slide-out" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
-        </a>
-    </nav>
+    <div class="navbar-fixed">
+        <nav>
+            <a data-target="slide-out" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+            </a>
+        </nav>
+    </div>
     <ul id="slide-out" class="sidenav">
         <li>
             <form>
                 <div class="input-field">
-                    <input id="search" type="search"> <!-- data-bind="textInput: searchInput, event: {keyup: search}" -->
+                    <input id="search" type="search" data-bind="textInput: searchInput,valueUpdate: 'afterkeydown'" placeholder="Search Locations">
                     <label class="label-icon" for="search">
                         <i class="material-icons">search</i>
                     </label>
@@ -29,9 +31,11 @@
                 </div>
             </form>
         </li>
-        <li class="collection"> <!--  data-bind="foreach: lunchLocations" -->
-            <a class="waves-effect collection-item" href="#!" ></a> <!-- data-bind="text: title, click: show" -->
-        </li>
+        <div>
+            <ul class="collection" data-bind="foreach: showLocations">
+                <a class="waves-effect collection-item" data-bind="text: title, click: $parent.showDetails"></a>
+            </ul>
+        </div>
     </ul>
     <div class="row">
         <div class="" id="map">
@@ -44,8 +48,8 @@
     <script type="text/javascript" src="js/lib/materialize.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/data.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdSSNDMdIuMpB_KZn8c_Pb9eL4WyXZMyQ&callback=initMap" onerror="mapError()"
-        type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdSSNDMdIuMpB_KZn8c_Pb9eL4WyXZMyQ&callback=initApp"
+        onerror="mapError()" type="text/javascript"></script>
 
 </body>
 
