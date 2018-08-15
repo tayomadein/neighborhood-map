@@ -1,8 +1,3 @@
-/* Init Nav */
-$(document).ready(function () {
-    $('.sidenav').sidenav();
-});
-
 /* Start the App */
 function initApp() {
     ko.applyBindings(new appBuilder());
@@ -16,7 +11,10 @@ function mapError() {
 }
 
 function appBuilder() {
-    // let self = this;
+    this.applyOnReady = function () { // Init Nav
+        $('.sidenav').sidenav();
+    }
+    this.applyOnReady();
 
     this.searchInput = ko.observable('');
     this.marker;
@@ -26,8 +24,6 @@ function appBuilder() {
         this.searchInput(''); //reset search input
         map = new google.maps.Map(
             document.getElementById('map'), { zoom: 15, center: center });
-        // The marker, positioned at center
-        this.marker = new google.maps.Marker({ position: center, map: map });
 
         for (let i = 0; i < mapLocations.length; i++) {
             let mapLocation = mapLocations[i];
@@ -42,13 +38,17 @@ function appBuilder() {
             this.marker.addListener('click', function () { //When a marker is clicked
                 this.setAnimation(google.maps.Animation.BOUNCE);
                 let position = `${mapLocation.location.lat},${mapLocation.location.lng}`;
-
+                let query;
                 getFullAddress(position).then((res) => {
+                    console.log(res);
+                    query = `${res.results[0].formatted_address} ${mapLocation.title}`
+                    console.log(query);
                     M.toast({ html: `Visit ${mapLocation.title} at ${res.results[0].formatted_address}.`, displayLength: 4000 });
-                })
+                    getNYTArticles(query);
+                });
                 map.setZoom(20);
                 map.setCenter(this.getPosition());
-                setTimeout((function() {
+                setTimeout((function () {
                     this.setAnimation(null);
                     map.setZoom(15);
                     map.setCenter(center);
@@ -73,6 +73,9 @@ function appBuilder() {
     }, this);
 
     this.showDetails = function () { // show location details
+        let query = `${this.title}`;
+        console.log(query);
+        getNYTArticles(query);
         this.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
         this.setAnimation(google.maps.Animation.BOUNCE);
         M.toast({ html: `This is ${this.title}. Click on its marker to get full address.`, displayLength: 4000 });
@@ -88,6 +91,46 @@ function appBuilder() {
         }).fail(() => {
             alert('An error occurred while retrieving the full address');
         }))
+    }
+
+    //
+    const getNYTArticles = function (query) {
+        $('#nytimes-articles').text('Articles about your restaurant will appear here!')
+        // NYTimes Ajax request
+        let nytURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+        nytURL += '?' + $.param({
+            'api-key': "55de6ea34c834386aa8f72d8297c0cc8",
+            'q': query,
+            'sort': "newest",
+        });
+        $.getJSON(nytURL, (res) => {
+            let { response } = res;
+            let items = [];
+            console.log(response.docs)
+            $.each(response.docs, (key, val) => {
+                let imgSrc = 'https://images.unsplash.com/photo-1494346480775-936a9f0d0877?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83ddd8a82b2ae0f63d3916bb79d87df5&auto=format&fit=crop&w=703&q=80';
+
+                if (val.multimedia) {
+                    val.multimedia.find(function (media) {
+                        console.log(media)
+                        if(media.subtype == 'thumbnail') {
+                            console.log(media.url)
+                            imgSrc =  `https://www.nytimes.com/${media.url}`;}
+                    })
+                } 
+                console.log(imgSrc);
+                items.push(
+                    `<a class = "collection-item avatar" id=' ${key} ' href=${val.web_url}>
+                        <span class='title'> ${val.headline.main} </span>
+                        <img class="circle" src=${imgSrc}>
+                    </a>`);
+            });
+
+            $(items.join('')).appendTo($('#nytimes-articles'));
+        }).fail(() => {
+            $('#nytimes-header').text(`New York Times articles could not be loaded`);
+            console.log("error");
+        });
     }
 
 }

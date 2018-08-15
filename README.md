@@ -11,6 +11,7 @@ This is a project for [Udacity Full Stack Web Developer Nanodegree](https://www.
 * [Materialize CSS](https://materializecss.com/)
 * [Google Maps API](https://developers.google.com/maps/)
 * [Geocode API](https://developers.google.com/maps/documentation/javascript/geocoding)
+* [NYTimes API](https://developer.nytimes.com/)
 * [Material Icon](https://material.io/tools/icons/)
 
 ## Requirements
